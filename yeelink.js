@@ -12,7 +12,11 @@ var mix = function(base, child, deep){
         o[key] = base[key];
     }
     for(var key in child){
-        o[key] = child[key];
+		if(deep && isPlainObject(o[key])){
+			o[key] = mix(o[key], child[key]);
+		}else{
+			o[key] = child[key];
+		}
     }
     return o;
 };
@@ -65,7 +69,7 @@ Yeelink.prototype = {
 		req.end();
 	}
 }
-
+/*
 var yee = new Yeelink('4d0cd8e2e9cd21714b10696f80645d42');
 yee.http({
 	path: '/v1.0/device/2714/sensor/3751/datapoints'
@@ -73,3 +77,17 @@ yee.http({
 	console.log(statusCode);
 	console.log(body);
 });
+*/
+var options = mix({
+	hostname: 'api.yeelink.net',
+	path: '/v1.0/',
+	method: 'get',
+	headers: {'U-ApiKey': this.accessKey},
+	encoding: 'utf8',
+	data: ''
+}, {
+	headers: {'P-ApiKey': 'adfasdfsadf'}
+}, true);
+
+console.log(options);
+
