@@ -1,6 +1,12 @@
 var http = require("http");
-
-var mix = function(base, child){
+var isPlainObject = function(obj){
+	if(!obj.hasOwnProperty('constructor') && typeof obj == 'object' && obj.constructor == Object){
+		return true;
+	}
+	
+	return false;
+}
+var mix = function(base, child, deep){
     var o = new Object();
     for(var key in base){
         o[key] = base[key];
