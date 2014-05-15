@@ -34,7 +34,7 @@ Yeelink.prototype = {
     /**
      * common http
      * @param options {hostname, path, method, headers, encoding, data}
-     * @param callback statusCode body
+     * @param callback [statusCode, body, response]
      */
 	http: function(options, callback){
 
@@ -54,8 +54,12 @@ Yeelink.prototype = {
 			headers: options.headers
 		}, function(res){
 			res.setEncoding(options.encoding);
+			var body = '';
 			res.on('data', function(chunk){
-				callback(res.statusCode, chunk);
+				body += chunk;
+			});
+			res.on('end', function(){
+				callback(res.statusCode, body, res);
 			});
 		});
 		
@@ -69,15 +73,9 @@ Yeelink.prototype = {
 		req.end();
 	}
 }
+module.exports = Yeelink;
+
 /*
-var yee = new Yeelink('4d0cd8e2e9cd21714b10696f80645d42');
-yee.http({
-	path: '/v1.0/device/2714/sensor/3751/datapoints'
-}, function(statusCode, body){
-	console.log(statusCode);
-	console.log(body);
-});
-*/
 var options = mix({
 	hostname: 'api.yeelink.net',
 	path: '/v1.0/',
@@ -90,4 +88,4 @@ var options = mix({
 }, true);
 
 console.log(options);
-
+*/
