@@ -9,20 +9,30 @@
 	<script src="resource/bootstrap/js/bootstrap.js"></script>
 </head>
 <body>
-<div class="panel panel-default">
-  <div class="panel-heading">绑定设备</div>
+<div class="panel panel-primary">
+  <div class="panel-heading">系统资源监控v0.1</div>
   <div class="panel-body">
-    <form role="form">
-	  <div class="form-group">
-		<label for="product_sn">Product SN</label>
-		<input type="text" class="form-control" id="product_sn" placeholder="SN">
+	<div class="panel panel-info">
+	  <div class="panel-heading"><span class="glyphicon glyphicon-dashboard"></span> CPU占用</div>
+	  <div class="panel-body">
+		<div><span id="cpu_percentage"></span> %</div>
+		<div id="cpu_update"></div>
 	  </div>
-	  <div class="form-group">
-		<label for="product_key">Product Key</label>
-		<input type="text" class="form-control" id="product_key" placeholder="Key">
+	</div>
+	
+	<div class="panel panel-info">
+	  <div class="panel-heading"><span class="glyphicon glyphicon-dashboard"></span> 内存使用</div>
+	  <div class="panel-body">
+		<div><span id="memory_usage"></span> GB</div>
+		<div id="mem_update"></div>
 	  </div>
-	  <button id="btn_bind" type="button" class="btn btn-default">确定</button>
-	</form>
+	</div>
+	
+	<div class="btn-group btn-group-justified">
+		<div class="btn-group">
+			<a type="button" class="btn btn-primary" href="bind.html">绑定</a>
+		</div>
+	</div>
   </div>
 </div>
 
@@ -32,27 +42,9 @@ var fs = require("fs");
 fs.readFile("config.txt", function(err, data){
 	if(err) throw err;
 	var data = JSON.parse(data);
-	
-	$("#product_sn").val(data.sn);
-	$("#product_key").val(data.key);
-});
-
-
-$("#btn_bind").click(function(){
-	var sn = $("#product_sn").val();
-	var key = $("#product_key").val();
-	
-	var obj = {
-		sn: sn,
-		key: key
-	};
-	
-	fs.writeFile('config.txt', JSON.stringify(obj), function (err) {
-	  if (err) throw err;
-	  
-	  console.log("A");
-	});
 });
 </script>
+
+<script src="system_mon.js"></script>
 </body>
 </html>
