@@ -38,11 +38,10 @@
 
 <script>
 var fs = require("fs");
-
-fs.readFile("config.txt", function(err, data){
-	if(err) throw err;
-	var data = JSON.parse(data);
-});
+var exists = fs.existsSync('./config.txt');
+if(!exists){
+	window.location.href = 'bind.html';
+}
 </script>
 
 <script src="system_mon.js"></script>

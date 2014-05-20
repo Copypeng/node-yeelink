@@ -40,7 +40,8 @@ var fs = require("fs");
 var Yeelink = require('./yeelink');
 
 fs.readFile("config.txt", function(err, data){
-	if(err) throw err;
+	if(err) 
+		return;
 	var data = JSON.parse(data);
 	
 	$("#product_sn").val(data.sn);
