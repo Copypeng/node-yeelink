@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+ul,
+ol,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+p,
+input,
+button,
+table,
+tr,
+th,
+td,
+thead,
+tbody,
+pre {
+  padding: 0;
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+blockquote,
+dl,
+dt,
+dd {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+em,
+cite,
+i {
+  font-style: normal;
+}
+img {
+  border: none;
+}
+.abs {
+  position: absolute;
+}
+.rel {
+  position: relative;
+}
+.noborder {
+  border: none !important;
+}
+body {
+  font-family: "Microsoft YaHei";
+}
+header.page {
+  padding: 1px;
+  line-height: 80px;
+}
+header.page h1 {
+  line-height: 80px;
+  font-size: 24px;
+  color: #fff;
+  height: 80px;
+}
+header.page h1 small {
+  color: #bce8f1;
+}
+section.main {
+  padding: 10px 40px;
+}
+section.main .row {
+  border-bottom: 1px solid #ccc;
+}
+section.main .row .col-xs-1 {
+  font-size: 36px;
+  color: #ccc;
+  line-height: 100px;
+  height: 100px;
+}
+section.main .row .col-xs-4 {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 100px;
+  height: 100px;
+}
+section.main .row .col-xs-6 {
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 100px;
+  height: 100px;
+  text-align: right;
+}
+section.main .row .update_time {
+  text-align: right;
+  font-size: 12px;
+  padding-right: 70px;
+  position: relative;
+  top: -30px;
+}
+footer.page {
+  padding: 10px;
+  height: 50px;
+  text-align: right;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}

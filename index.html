@@ -7,34 +7,43 @@
 	<link rel="stylesheet" href="resource/bootstrap/css/bootstrap.min.css">
 	<script src="resource/js/jquery-2.1.1.min.js"></script>
 	<script src="resource/bootstrap/js/bootstrap.js"></script>
+	<link rel="stylesheet" href="resource/css/index.css">
 </head>
 <body>
-<div class="panel panel-primary">
-  <div class="panel-heading">系统资源监控v0.1</div>
-  <div class="panel-body">
-	<div class="panel panel-info">
-	  <div class="panel-heading"><span class="glyphicon glyphicon-dashboard"></span> CPU占用</div>
-	  <div class="panel-body">
-		<div><span id="cpu_percentage"></span> %</div>
-		<div id="cpu_update"></div>
-	  </div>
-	</div>
-	
-	<div class="panel panel-info">
-	  <div class="panel-heading"><span class="glyphicon glyphicon-dashboard"></span> 内存使用</div>
-	  <div class="panel-body">
-		<div><span id="memory_usage"></span> GB</div>
-		<div id="mem_update"></div>
-	  </div>
-	</div>
-	
-	<div class="btn-group btn-group-justified">
-		<div class="btn-group">
-			<a type="button" class="btn btn-primary" href="bind.html">绑定</a>
+<header class="page bg-primary">
+	<h1 style="padding-left:10px;">系统资源监控 <small>Beta 1</small></h1>
+</header>
+<section class="main">
+	<div class="row">
+		<div class="col-xs-1">
+			<span class="glyphicon glyphicon-dashboard text-primary"></span>
 		</div>
+		<div class="col-xs-4 text-primary">
+			CPU占用
+		</div>
+		<div class="col-xs-6">
+			<div><span id="cpu_percentage">24.2</span> %</div>
+		</div>
+		
+		<div id="cpu_update" class="update_time text-muted">asdfasdfasdfasdfasdfsdf</div>
 	</div>
-  </div>
-</div>
+	
+	<div class="row" style="border:0 none">
+		<div class="col-xs-1">
+			<span class="glyphicon glyphicon-hdd text-primary"></span>
+		</div>
+		<div class="col-xs-4 text-primary">
+			内存占用
+		</div>
+		<div class="col-xs-6">
+			<div><span id="memory_usage">16.57</span> GB</div>
+		</div>
+		<div id="mem_update" class="update_time text-muted">meme</div>
+	</div>
+</section>
+<footer class="page bg-primary">
+	<a type="button" class="btn btn-warning btn-sm" href="bind.html">绑定设备</a>
+</footer>
 
 <script>
 var fs = require("fs");

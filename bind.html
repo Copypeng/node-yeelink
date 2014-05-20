@@ -7,34 +7,34 @@
 	<link rel="stylesheet" href="resource/bootstrap/css/bootstrap.min.css">
 	<script src="resource/js/jquery-2.1.1.min.js"></script>
 	<script src="resource/bootstrap/js/bootstrap.js"></script>
+	<link rel="stylesheet" href="resource/css/index.css">
 </head>
 <body>
-<div class="panel panel-primary">
-  <div class="panel-heading">绑定设备</div>
-  <div class="panel-body">
+<header class="page bg-primary">
+	<h1 style="padding-left:10px;">绑定设备 <small>系统资源监控</small></h1>
+</header>
+<section class="main">
     <form role="form">
 	  <div class="form-group">
-		<label for="product_sn">Product SN</label>
+		<label for="product_sn">产品序列号</label>
 		<input type="text" class="form-control" id="product_sn" placeholder="SN">
 	  </div>
 	  <div class="form-group">
-		<label for="product_key">Product Key</label>
+		<label for="product_key">产品密钥</label>
 		<input type="text" class="form-control" id="product_key" placeholder="Key">
 	  </div>
 	  
 	  <div class="form-group">
-		<label for="product_key">User Login</label>
+		<label for="product_key">用户Yeelink登录名</label>
 		<input type="text" class="form-control" id="user_login" placeholder="User Login">
-	  </div>
-	  <div class="form-group">
-		<button id="btn_bind" type="button" class="btn btn-primary">确定</button> 
-		<a href="index.html" class="btn btn-info btn-sm">返回</a>
 	  </div>
 	</form>
 	<div class="alert alert-success" style="display:none"></div>
-  </div>
-</div>
-
+</section>
+<footer class="page bg-primary">
+	<a href="index.html" class="btn btn-success btn-sm pull-left">返回</a>
+	<button id="btn_bind" type="button" class="btn btn-warning btn-sm pull-right">确定</button> 
+</footer>
 <script>
 var fs = require("fs");
 var Yeelink = require('./yeelink');
@@ -62,7 +62,7 @@ $("#btn_bind").click(function(){
 	
 	var yee = new Yeelink(key, Yeelink.P_KEY);
 	$('.alert').attr('class', 'alert alert-info').html('开始绑定产品').show();
-	yee.bindProduct(sn, user, function(statusCode, body){
+	yee.bindProduct(sn, user, true, function(statusCode, body){
 		if(statusCode != 200){
 			$('.alert').attr('class', 'alert alert-danger').html(body).show();
 			return;
@@ -94,6 +94,10 @@ $("#btn_bind").click(function(){
 				fs.writeFile('config.txt', JSON.stringify(obj), function (err) {
 					if (err) throw err;
 					$('.alert').attr('class', 'alert alert-success').html('绑定成功').show();
+					
+					setTimeout(function(){
+						window.location.href="index.html";
+					}, 1000);
 				});
 			});
 			

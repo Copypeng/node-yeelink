@@ -111,12 +111,13 @@ Yeelink.prototype = {
 	/**
 	 * 绑定一个设备
 	 */
-	bindProduct: function(productSN, userLogin, callback){
+	bindProduct: function(productSN, userLogin, force, callback){
 		this.http({
 			path: '/v1.0/product/bind/' + productSN,
 			method: 'post',
 			data: JSON.stringify({
-				user_login: userLogin
+				user_login: userLogin,
+				force: force
 			})
 		}, callback);
 	},

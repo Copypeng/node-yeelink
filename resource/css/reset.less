@@ -1,0 +1,46 @@
+
+body {
+	margin:0;
+	padding:0;
+	font-size:14px;
+}
+ul, ol, li {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+p, input, button,table, tr, th, td, thead, tbody ,pre{
+	padding:0;
+	margin:0;
+}
+h1, h2, h3, h4, h5, blockquote, dl, dt, dd {
+	margin:0;
+	padding:0;
+	font-weight:normal;
+}
+em, cite, i{font-style:normal;}
+img{border:none;}
+.rect(@width, @height){
+	width: @width;
+	height: @height;
+}
+
+.rect(@size){
+	width: @size;
+	height: @size;
+}
+
+.abs{
+	position:absolute;
+}
+.rel{
+	position:relative;
+}
+.noborder{
+	border:none !important;
+}
+
+.pos(@x, @y){
+	left:@x;
+	top:@y;
+}
