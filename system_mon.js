@@ -48,7 +48,7 @@ fs.readFile("config.txt", function(err, data){
 	var data = JSON.parse(data);
 	pdata = data;
 	yee = new Yeelink(data.key, Yeelink.P_KEY);
-	
+	uploadData();
 	setInterval(function(){
 		yee.getLastDataPoint(pdata.device_id, pdata.sensorIds[1], function(statusCode, body){
 			var data = JSON.parse(body);
