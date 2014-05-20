@@ -50,7 +50,7 @@ Yeelink.prototype = {
             data: ''
         };
         var mixedOptions = mix(defalutOptions, options);
-        if(mixedOptions.method.toLowerCase() == 'post' mixedOptions.method.toLowerCase() == 'put'){
+        if(mixedOptions.method.toLowerCase() == 'post' || mixedOptions.method.toLowerCase() == 'put'){
             mixedOptions.headers['Content-Type'] = 'application/x-www-form-urlencoded';
             mixedOptions.headers['Content-Length'] = Buffer.byteLength(mixedOptions.data);
         }
