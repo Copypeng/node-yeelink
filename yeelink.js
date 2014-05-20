@@ -49,15 +49,18 @@ Yeelink.prototype = {
             encoding: 'utf8',
             data: ''
         };
-        options = mix(defalutOptions, options);
-
+        var mixedOptions = mix(defalutOptions, options);
+        if(mixedOptions.method.toLowerCase() == 'post'){
+            mixedOptions.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+            mixedOptions.headers['Content-Length'] = Buffer.byteLength(mixedOptions.data);
+        }
 		var req = http.request({
-			hostname: options.hostname,
-			path: options.path,
-			method: options.method,
-			headers: options.headers
+			hostname: mixedOptions.hostname,
+			path: mixedOptions.path,
+			method: mixedOptions.method,
+			headers: mixedOptions.headers
 		}, function(res){
-			res.setEncoding(options.encoding);
+			res.setEncoding(mixedOptions.encoding);
 			var body = '';
 			res.on('data', function(chunk){
 				body += chunk;
@@ -70,8 +73,8 @@ Yeelink.prototype = {
 		req.on('error', function(e){
 			console.log('problem');
 		});
-		if(options.data !== ''){
-            req.write(options.data);
+		if(mixedOptions.data !== ''){
+            req.write(mixedOptions.data);
         }
 
 		req.end();
@@ -141,4 +144,16 @@ var options = mix({
 }, true);
 
 console.log(options);
+var yee = new Yeelink('4d0cd8e2e9cd21714b10696f80645d42');
+yee.http({
+    
+}, function(status, body){
+   console.log(status);
+   console.log(body);
+});
+yee.addDataPoint(9007, 16259, 40, function(stat, body){
+    console.log(stat);
+    console.log(body);
+});
+
 */
