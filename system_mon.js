@@ -48,18 +48,15 @@ fs.readFile("config.txt", function(err, data){
 	var data = JSON.parse(data);
 	pdata = data;
 	yee = new Yeelink(data.key, Yeelink.P_KEY);
-	swicher && uploadData();
 	
 	setInterval(function(){
 		yee.getLastDataPoint(pdata.device_id, pdata.sensorIds[1], function(statusCode, body){
 			var data = JSON.parse(body);
 			
-			if(data.value == 1){
-				swicher = true;
-			}else{
-				swicher = false;
+			if(!data.value == 1){
+				var exec = require('child_process').exec;
+				exec("halt");
 			}
-			swicher && uploadData();
 		});
 		
 	}, 10000);
@@ -77,6 +74,11 @@ function uploadData(){
 	
 	yee.addDataPoint(pdata.device_id, pdata.sensorIds[0], percentage, function(){});
 	yee.addDataPoint(pdata.device_id, pdata.sensorIds[2], memoryUsage, function(){});
+	
+	
+	setTimeout(function(){
+		uploadData();
+	}, 10000);
 }
 
 
