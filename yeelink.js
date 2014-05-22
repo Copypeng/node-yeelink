@@ -52,7 +52,14 @@ Yeelink.prototype = {
         var mixedOptions = mix(defalutOptions, options);
         if(mixedOptions.method.toLowerCase() == 'post' || mixedOptions.method.toLowerCase() == 'put'){
             mixedOptions.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-            mixedOptions.headers['Content-Length'] = Buffer.byteLength(mixedOptions.data);
+			
+			if(typeof mixedOptions.data == 'string'){
+				mixedOptions.headers['Content-Length'] = Buffer.byteLength(mixedOptions.data);
+			}
+			
+			if(mixedOptions.data instanceof Buffer){
+				mixedOptions.headers['Content-Length'] = mixedOptions.data.length;
+			}
         }
 		var req = http.request({
 			hostname: mixedOptions.hostname,
@@ -73,7 +80,7 @@ Yeelink.prototype = {
 		req.on('error', function(e){
 			console.log('problem');
 		});
-		if(mixedOptions.data !== ''){
+		if(mixedOptions.data){
             req.write(mixedOptions.data);
         }
 
@@ -101,6 +108,14 @@ Yeelink.prototype = {
 			data: JSON.stringify({
 				value: value
 			})
+		}, callback);
+	},
+	
+	addPhoto: function(deviceId, sensorId, photo, callback){
+		this.http({
+			path: '/v1.1/device/' + deviceId + '/sensor/' + sensorId + '/datapoints',
+			method: 'post',
+			data: photo
 		}, callback);
 	},
 	getLastDataPoint: function(deviceId, sensorId, callback){
