@@ -43,7 +43,7 @@ Yeelink.prototype = {
 		var self = this;
 		var defalutOptions = {
             hostname: 'api.yeelink.net',
-            path: '/v1.0/',
+            path: '/v1.1/',
             method: 'get',
             headers: (function(){var headers = {};headers[self.keyType] = self.accessKey;return headers;})(),
             encoding: 'utf8',
@@ -84,19 +84,19 @@ Yeelink.prototype = {
 	 */
 	deviceInfo: function(deviceId, callback){
 		this.http({
-			path: '/v1.0/device/' + deviceId
+			path: '/v1.1/device/' + deviceId
 		}, callback);
 	},
 	
 	sensorList: function(deviceId, callback){
 		this.http({
-			path: '/v1.0/device/' + deviceId + '/sensors'
+			path: '/v1.1/device/' + deviceId + '/sensors'
 		}, callback);
 	},
 	
 	addDataPoint: function(deviceId, sensorId, value, callback){
 		this.http({
-			path: '/v1.0/device/' + deviceId + '/sensor/' + sensorId + '/datapoints',
+			path: '/v1.1/device/' + deviceId + '/sensor/' + sensorId + '/datapoints',
 			method: 'post',
 			data: JSON.stringify({
 				value: value
@@ -105,7 +105,7 @@ Yeelink.prototype = {
 	},
 	getLastDataPoint: function(deviceId, sensorId, callback){
 		this.http({
-			path: '/v1.0/device/' + deviceId + '/sensor/' + sensorId + '/datapoint'
+			path: '/v1.1/device/' + deviceId + '/sensor/' + sensorId + '/datapoint'
 		}, callback);
 	},
 	/**
@@ -113,7 +113,7 @@ Yeelink.prototype = {
 	 */
 	bindProduct: function(productSN, userLogin, force, callback){
 		this.http({
-			path: '/v1.0/product/bind/' + productSN,
+			path: '/v1.1/product/bind/' + productSN,
 			method: 'post',
 			data: JSON.stringify({
 				user_login: userLogin,
@@ -126,7 +126,7 @@ Yeelink.prototype = {
 	 */
 	productDeviceInfo: function(productSN, callback){
 		this.http({
-			path: '/v1.0/product/' + productSN
+			path: '/v1.1/product/' + productSN
 		}, callback);
 	}
 }
@@ -135,7 +135,7 @@ module.exports = Yeelink;
 /*
 var options = mix({
 	hostname: 'api.yeelink.net',
-	path: '/v1.0/',
+	path: '/v1.1/',
 	method: 'get',
 	headers: {'U-ApiKey': this.accessKey},
 	encoding: 'utf8',
