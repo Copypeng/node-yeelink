@@ -78,7 +78,7 @@ Yeelink.prototype = {
 		});
 		
 		req.on('error', function(e){
-			console.log('problem');
+			console.log(e);
 		});
 		if(mixedOptions.data){
             req.write(mixedOptions.data);
