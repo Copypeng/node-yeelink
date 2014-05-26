@@ -49,10 +49,11 @@ fs.readFile("config.txt", function(err, data){
 	pdata = data;
 	yee = new Yeelink(data.key, Yeelink.P_KEY);
 	uploadData();
+	yee.addDataPoint(pdata.device_id, pdata.sensorIds[1], 1, function(){});
 	setInterval(function(){
 		yee.getLastDataPoint(pdata.device_id, pdata.sensorIds[1], function(statusCode, body){
+			console.log(body);
 			var data = JSON.parse(body);
-			
 			if(!data.value == 1){
 				var exec = require('child_process').exec;
 				exec("halt");
@@ -74,7 +75,6 @@ function uploadData(){
 	
 	yee.addDataPoint(pdata.device_id, pdata.sensorIds[0], percentage, function(){});
 	yee.addDataPoint(pdata.device_id, pdata.sensorIds[2], memoryUsage, function(){});
-	yee.addDataPoint(pdata.device_id, pdata.sensorIds[1], 1, function(){});
 	
 	setTimeout(function(){
 		uploadData();
