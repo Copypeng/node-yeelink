@@ -56,7 +56,7 @@ fs.readFile("config.txt", function(err, data){
 			var data = JSON.parse(body);
 			if(!data.value == 1){
 				var exec = require('child_process').exec;
-				exec("halt");
+				exec("shutdown -h now");
 			}
 		});
 		
