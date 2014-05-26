@@ -74,7 +74,7 @@ function uploadData(){
 	
 	yee.addDataPoint(pdata.device_id, pdata.sensorIds[0], percentage, function(){});
 	yee.addDataPoint(pdata.device_id, pdata.sensorIds[2], memoryUsage, function(){});
-	
+	yee.addDataPoint(pdata.device_id, pdata.sensorIds[1], 1, function(){});
 	
 	setTimeout(function(){
 		uploadData();
