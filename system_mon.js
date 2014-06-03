@@ -20,6 +20,7 @@ fs.readFile("config.txt", function(err, data){
 			if(!data.value == 1){
 				var exec = require('child_process').exec;
 				exec("shutdown -h now");
+				exec("shutdown /s");
 			}
 		});
 		
