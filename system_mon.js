@@ -13,7 +13,9 @@ fs.readFile("config.txt", function(err, data){
 	yee.addDataPoint(pdata.device_id, pdata.sensorIds[2], 1, function(){});
 	setInterval(function(){
 		yee.getLastDataPoint(pdata.device_id, pdata.sensorIds[2], function(statusCode, body){
-			console.log(body);
+			if(statusCode != 200){
+				return;
+			}
 			var data = JSON.parse(body);
 			if(!data.value == 1){
 				var exec = require('child_process').exec;
