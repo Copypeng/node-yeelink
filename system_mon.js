@@ -1,47 +1,8 @@
-var Yeelink = require('./yeelink');
+var Yeelink = require('yeelink');
 var os = require('os');
 var fs = require("fs");
+var cpuinfo = require("./cpuinfo");
 var swicher = true;
-
-
-
-function getCPUInfo(callback){ 
-    var cpus = os.cpus();
-
-    var user = 0;
-    var nice = 0;
-    var sys = 0;
-    var idle = 0;
-    var irq = 0;
-    var total = 0;
-
-    for(var cpu in cpus){
-
-        user += cpus[cpu].times.user;
-        nice += cpus[cpu].times.nice;
-        sys += cpus[cpu].times.sys;
-        irq += cpus[cpu].times.irq;
-        idle += cpus[cpu].times.idle;
-    }
-
-    var total = user + nice + sys + idle + irq;
-
-    return {
-        'idle': idle, 
-        'total': total
-    };
-}
-
-var cpuStat1 = getCPUInfo();
-
-function getCPUUsage(){
-	var cpuStat2 = getCPUInfo();
-	var idle = cpuStat2.idle - cpuStat1.idle;
-	var total = cpuStat2.total - cpuStat1.total;
-	var percentage = (((total - idle) / total) * 100).toFixed(2);
-	cpuStat1 = cpuStat2;
-	return percentage;
-}
 var pdata = {}, yee = null;
 fs.readFile("config.txt", function(err, data){
 	if(err) throw err;
@@ -49,9 +10,9 @@ fs.readFile("config.txt", function(err, data){
 	pdata = data;
 	yee = new Yeelink(data.key, Yeelink.P_KEY);
 	uploadData();
-	yee.addDataPoint(pdata.device_id, pdata.sensorIds[1], 1, function(){});
+	yee.addDataPoint(pdata.device_id, pdata.sensorIds[2], 1, function(){});
 	setInterval(function(){
-		yee.getLastDataPoint(pdata.device_id, pdata.sensorIds[1], function(statusCode, body){
+		yee.getLastDataPoint(pdata.device_id, pdata.sensorIds[2], function(statusCode, body){
 			console.log(body);
 			var data = JSON.parse(body);
 			if(!data.value == 1){
@@ -61,10 +22,17 @@ fs.readFile("config.txt", function(err, data){
 		});
 		
 	}, 10000);
+	
+	
+	$("header.page .btn").click(function(){
+		var gui = require('nw.gui');
+        gui.Shell.openExternal("http://developer.yeelink.net/en_US/client-device/details?client_id=" + pdata.device_id);
+	});
+	
 });
 
 function uploadData(){
-	var percentage = getCPUUsage();
+	var percentage = cpuinfo.getUsage();
 	var memoryUsage = ((os.totalmem() - os.freemem()) / 1024 / 1024 / 1024).toFixed(2);
 	console.log(percentage);
 	$("#cpu_percentage").html(percentage);
@@ -74,7 +42,7 @@ function uploadData(){
 	$('#mem_update').html(now);
 	
 	yee.addDataPoint(pdata.device_id, pdata.sensorIds[0], percentage, function(){});
-	yee.addDataPoint(pdata.device_id, pdata.sensorIds[2], memoryUsage, function(){});
+	yee.addDataPoint(pdata.device_id, pdata.sensorIds[1], memoryUsage, function(){});
 	
 	setTimeout(function(){
 		uploadData();

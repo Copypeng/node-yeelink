@@ -1,9 +1,19 @@
 {
   "name": "system-monitor",
   "main": "index.html",
+  "description": "System monitor",
+	"version": "v0.1",
+	"maintainers":{
+		"name": "DK",
+		"email": "dukai86@gmail.com",
+		"web": "http://www.yeelink.net"
+	},
   "window": {
-    "toolbar": true,
+	"debug": true,
+    "toolbar": false,
     "width": 600,
-    "height": 500
+    "height": 500,
+	"resizable": false,
+	"icon": "icon.png"
   }
 }

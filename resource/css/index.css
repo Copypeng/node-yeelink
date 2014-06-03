@@ -69,6 +69,12 @@ header.page h1 {
 header.page h1 small {
   color: #bce8f1;
 }
+header.page .row {
+  margin: 0;
+}
+header.page .row .btn {
+  margin-top: 30px;
+}
 section.main {
   padding: 10px 40px;
 }

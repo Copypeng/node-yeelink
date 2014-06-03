@@ -1,1 +1,1 @@
-{"sn":"MON201405001001","key":"ec97c1db8fc6a0cb4f4173af2","user":"dukai","device_id":9246,"sensorIds":["16294","16295","16296"]}
+{"sn":"ysm2014060110001000001","key":"174630c722d1678535b437b6c","user":"dukai","device_id":10790,"sensorIds":["17795","17796","17797"]}
